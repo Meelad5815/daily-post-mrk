@@ -1,0 +1,1 @@
+import {NextResponse} from "next/server";import {publishInstagram} from "../../../../lib/providers";export async function POST(req:Request){const {caption,imageUrl}=await req.json();if(!caption||!imageUrl)return NextResponse.json({ok:false,error:"caption and imageUrl required"},{status:400});return NextResponse.json(await publishInstagram(caption,imageUrl));}
