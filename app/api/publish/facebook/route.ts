@@ -1,0 +1,1 @@
+import {NextResponse} from "next/server";import {publishFacebook} from "../../../../lib/providers";export async function POST(req:Request){const {text}=await req.json();if(!text)return NextResponse.json({ok:false,error:"text required"},{status:400});return NextResponse.json(await publishFacebook(text));}
