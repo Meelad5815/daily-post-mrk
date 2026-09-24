@@ -1,1 +1,11 @@
-import {NextResponse} from "next/server";import {fallbackPost} from "../../../lib/content-engine";export async function POST(req:Request){const {topic="web development"}=await req.json().catch(()=>({}));return NextResponse.json({ok:true,source:"fallback",post:fallbackPost(topic)});}
+import { NextResponse } from "next/server";
+import { generateWithAI } from "../../../lib/ai";
+export async function POST(req: Request) {
+  try {
+    const { topic = "Web development tips for Pakistani small businesses", platform = "facebook" } = await req.json().catch(() => ({}));
+    const post = await generateWithAI(topic, platform);
+    return NextResponse.json({ ok: true, post });
+  } catch (error) {
+    return NextResponse.json({ ok: false, error: error instanceof Error ? error.message : "Generation failed" }, { status: 500 });
+  }
+}
