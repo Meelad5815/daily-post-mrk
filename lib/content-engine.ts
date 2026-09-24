@@ -1,0 +1,4 @@
+import profile from "../content/brand-profile.json";
+export type Platform="facebook"|"instagram"|"whatsapp"|"website";
+export function buildPrompt(topic:string,platform:Platform){return JSON.stringify({task:"Create one original daily social post",brand:profile,topic,platform,requirements:["strong hook","useful value","natural CTA","no fabricated facts"]});}
+export function fallbackPost(topic:string){return {title:topic,body:`MRK OFFICIAL DIGITAL 786 — ${topic}\n\nآپ کی آن لائن اور ٹیکنالوجی سے متعلق ضروریات کے لیے عملی حل۔\n\nرابطہ کریں اور اپنے کام کے مطابق solution حاصل کریں۔`,hashtags:["#MRK"," #WebDevelopment","#Pakistan"]};}
