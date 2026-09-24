@@ -1,0 +1,1 @@
+import {NextResponse} from "next/server";import {fallbackPost} from "../../../lib/content-engine";export async function POST(req:Request){const {topic="web development"}=await req.json().catch(()=>({}));return NextResponse.json({ok:true,source:"fallback",post:fallbackPost(topic)});}
