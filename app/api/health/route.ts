@@ -1,0 +1,2 @@
+import { NextResponse } from "next/server";
+export async function GET(){return NextResponse.json({ok:true,service:"MRK Daily Post Auto-Pilot",time:new Date().toISOString(),configured:{ai:!!process.env.AI_API_KEY,facebook:!!process.env.META_ACCESS_TOKEN&&!!process.env.META_PAGE_ID,instagram:!!process.env.META_ACCESS_TOKEN&&!!process.env.INSTAGRAM_BUSINESS_ACCOUNT_ID,whatsapp:!!process.env.WHATSAPP_ACCESS_TOKEN&&!!process.env.WHATSAPP_PHONE_NUMBER_ID}})}
