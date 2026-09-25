@@ -1,0 +1,3 @@
+import {NextResponse} from "next/server";import {createPost,listPosts} from "../../../lib/db";
+export async function GET(){return NextResponse.json({ok:true,posts:listPosts()})}
+export async function POST(req:Request){const b=await req.json();if(!b.title||!b.body)return NextResponse.json({ok:false,error:"title/body required"},{status:400});return NextResponse.json({ok:true,post:createPost({topic:b.topic||"",platform:b.platform||"facebook",title:b.title,body:b.body,hashtags:b.hashtags||[],status:b.status||"draft",scheduledAt:b.scheduledAt||new Date().toISOString()})},{status:201})}
