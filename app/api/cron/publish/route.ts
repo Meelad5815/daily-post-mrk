@@ -1,0 +1,2 @@
+import {NextResponse} from "next/server";import {listPosts,updatePost} from "../../../../lib/db";
+export async function GET(req:Request){const auth=req.headers.get("authorization");if(process.env.CRON_SECRET&&auth!==`Bearer ${process.env.CRON_SECRET}`)return NextResponse.json({ok:false,error:"unauthorized"},{status:401});const due=listPosts().filter(p=>p.status==="approved"&&new Date(p.scheduledAt)<=new Date());for(const p of due)updatePost(p.id,"published");return NextResponse.json({ok:true,processed:due.length,mode:"approval queue ready"})}
