@@ -1,0 +1,2 @@
+import {NextResponse} from "next/server";import {updatePost} from "../../../../lib/db";
+export async function PATCH(req:Request,{params}:{params:Promise<{id:string}>}){const {id}=await params;const {status}=await req.json();if(!["draft","approved","published","failed"].includes(status))return NextResponse.json({ok:false,error:"invalid status"},{status:400});const p=updatePost(id,status);return p?NextResponse.json({ok:true,post:p}):NextResponse.json({ok:false,error:"not found"},{status:404})}
